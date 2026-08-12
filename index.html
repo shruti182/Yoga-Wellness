@@ -6,6 +6,8 @@
   <title>Yogorise — Mindful Yoga & Meditation Platform</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&display=swap');
 
@@ -380,16 +382,13 @@
         <div class="max-w-2xl"><span class="font-semibold text-sm uppercase tracking-wider" style="color:var(--clay);">The Yogorise Journal</span><h2 class="text-3xl sm:text-4xl font-display font-medium mt-1" style="color:var(--ink);">Daily Yoga & Wellness Blog</h2><p class="mt-3 leading-relaxed" style="color:var(--ink-soft);">New articles, practical yoga guidance, mindful living ideas, breathing practices, and simple routines you can use every day.</p></div>
         <a href="#blog" class="inline-flex items-center gap-2 px-5 py-3 rounded-full font-semibold text-sm text-white shadow-md transition hover:-translate-y-0.5 self-start md:self-auto" style="background:var(--sage-deep);"><i class="fa-solid fa-pen-nib"></i> Read Today's Blog</a>
       </div>
-      <article class="grid lg:grid-cols-[.9fr_1.1fr] overflow-hidden bg-white rounded-3xl border shadow-sm hover:shadow-lg transition-all duration-500" style="border-color:rgba(71,86,63,.12);">
-        <div class="relative min-h-[280px] lg:min-h-full overflow-hidden"><img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1000&q=85" alt="Woman practicing peaceful yoga and meditation" class="absolute inset-0 w-full h-full object-cover"><span class="absolute top-5 left-5 px-3 py-1.5 rounded-full text-xs font-bold text-white shadow-sm" style="background:var(--sage-deep);">Today's Featured Article</span></div>
-        <div class="p-7 sm:p-9 lg:p-10"><div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-wider mb-4" style="color:var(--clay);"><span>Yoga Practice</span><span>·</span><span>5 min read</span></div><h3 class="text-2xl sm:text-3xl font-display font-medium mb-4" style="color:var(--ink);">10 Minutes of Morning Yoga to Start Your Day with Calm</h3><p class="leading-relaxed mb-6" style="color:var(--ink-soft);">A gentle sequence of movement, breath, and mindfulness designed to help you wake up your body and create a calmer beginning to your day.</p><div class="grid sm:grid-cols-3 gap-3 mb-7"><div class="p-4 rounded-2xl" style="background:rgba(139,154,125,.10);"><div class="text-xs font-semibold mb-1" style="color:var(--sage-deep);">01</div><div class="text-sm font-semibold">Gentle stretches</div></div><div class="p-4 rounded-2xl" style="background:rgba(201,154,68,.10);"><div class="text-xs font-semibold mb-1" style="color:var(--clay);">02</div><div class="text-sm font-semibold">Mindful breathing</div></div><div class="p-4 rounded-2xl" style="background:rgba(185,128,92,.10);"><div class="text-xs font-semibold mb-1" style="color:var(--clay);">03</div><div class="text-sm font-semibold">Quiet intention</div></div></div><button type="button" class="inline-flex items-center gap-2 font-semibold transition hover:gap-3" style="color:var(--sage-deep);" onclick="openBlogPost('10 Minutes of Morning Yoga to Start Your Day with Calm')">Read Full Article <i class="fa-solid fa-arrow-right text-sm"></i></button></div>
-      </article>
-      <div class="grid md:grid-cols-3 gap-8 mt-8">
-        <article class="bg-white rounded-3xl overflow-hidden border shadow-sm hover:shadow-lg transition-all duration-500" style="border-color:rgba(71,86,63,.12);"><div class="h-44 overflow-hidden"><img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=800&q=80" alt="Yoga posture practice" class="w-full h-full object-cover hover:scale-105 transition duration-700"></div><div class="p-6"><span class="text-xs font-semibold uppercase tracking-wider" style="color:var(--sage-deep);">Beginner Yoga</span><h3 class="text-xl font-display font-medium mt-2 mb-3">5 Yoga Poses for Beginners to Practice at Home</h3><p class="text-sm leading-relaxed mb-5" style="color:var(--ink-soft);">A simple introduction to foundational poses and how to build a consistent home practice.</p><button type="button" class="font-semibold text-sm" style="color:var(--sage-deep);" onclick="openBlogPost('5 Yoga Poses for Beginners to Practice at Home')">Read Article →</button></div></article>
-        <article class="bg-white rounded-3xl overflow-hidden border shadow-sm hover:shadow-lg transition-all duration-500" style="border-color:rgba(71,86,63,.12);"><div class="h-44 overflow-hidden"><img src="https://images.unsplash.com/photo-1508672019048-805c876b67e2?auto=format&fit=crop&w=800&q=80" alt="Peaceful meditation practice" class="w-full h-full object-cover hover:scale-105 transition duration-700"></div><div class="p-6"><span class="text-xs font-semibold uppercase tracking-wider" style="color:var(--sage-deep);">Mindfulness</span><h3 class="text-xl font-display font-medium mt-2 mb-3">How to Build a 10-Minute Daily Meditation Habit</h3><p class="text-sm leading-relaxed mb-5" style="color:var(--ink-soft);">Small, sustainable steps for making mindfulness a natural part of your everyday routine.</p><button type="button" class="font-semibold text-sm" style="color:var(--sage-deep);" onclick="openBlogPost('How to Build a 10-Minute Daily Meditation Habit')">Read Article →</button></div></article>
-        <article class="bg-white rounded-3xl overflow-hidden border shadow-sm hover:shadow-lg transition-all duration-500" style="border-color:rgba(71,86,63,.12);"><div class="h-44 overflow-hidden"><img src="https://images.unsplash.com/photo-1474418397713-7ede21d49118?auto=format&fit=crop&w=800&q=80" alt="Yoga breathing practice" class="w-full h-full object-cover hover:scale-105 transition duration-700"></div><div class="p-6"><span class="text-xs font-semibold uppercase tracking-wider" style="color:var(--sage-deep);">Pranayama</span><h3 class="text-xl font-display font-medium mt-2 mb-3">Pranayama for Beginners: Start with Your Breath</h3><p class="text-sm leading-relaxed mb-5" style="color:var(--ink-soft);">Understand the basics of conscious breathing and discover a gentle way to begin.</p><button type="button" class="font-semibold text-sm" style="color:var(--sage-deep);" onclick="openBlogPost('Pranayama for Beginners: Start with Your Breath')">Read Article →</button></div></article>
-      </div>
-      <div class="mt-10 p-6 sm:p-8 rounded-3xl border text-center" style="background:rgba(139,154,125,.08); border-color:rgba(71,86,63,.12);"><i class="fa-solid fa-calendar-day text-2xl mb-3" style="color:var(--gold);"></i><h3 class="text-xl font-display font-medium mb-2">Publish a New Blog Every Day</h3><p class="text-sm max-w-2xl mx-auto" style="color:var(--ink-soft);">This section is ready to become your daily yoga journal. Add a new article, image, category, and publish date here as your website grows.</p></div>
+      <!-- Featured post: filled in by loadBlogPosts() from Supabase -->
+      <div id="blog-featured"></div>
+      <!-- Recent posts grid: filled in by loadBlogPosts() from Supabase -->
+      <div id="blog-grid" class="grid md:grid-cols-3 gap-8 mt-8"></div>
+      <!-- Loading / empty states -->
+      <div id="blog-loading" class="text-center py-10" style="color:var(--ink-soft);"><i class="fa-solid fa-circle-notch fa-spin mr-2"></i>Loading articles…</div>
+      <div id="blog-empty" class="hidden mt-10 p-6 sm:p-8 rounded-3xl border text-center" style="background:rgba(139,154,125,.08); border-color:rgba(71,86,63,.12);"><i class="fa-solid fa-calendar-day text-2xl mb-3" style="color:var(--gold);"></i><h3 class="text-xl font-display font-medium mb-2">Publish a New Blog Every Day</h3><p class="text-sm max-w-2xl mx-auto" style="color:var(--ink-soft);">No articles yet — head to the <a href="admin.html" class="underline font-semibold" style="color:var(--sage-deep);">admin page</a> to write your first one.</p></div>
     </div>
   </section>
 
@@ -526,14 +525,68 @@
     }
 
 
-    // ---------- blog reader ----------
-    const blogPosts = {
-      '10 Minutes of Morning Yoga to Start Your Day with Calm': `<p class="mb-4">Begin your morning with a gentle practice that brings movement and breath together. Ten mindful minutes can be enough to create a calmer transition into the day.</p><h3 class="font-display text-xl mb-2" style="color:var(--ink);">A simple sequence</h3><p class="mb-4">Start with a comfortable seated breath, move through gentle neck and shoulder movements, then practice Cat–Cow, Child's Pose, a soft standing stretch, and a few slow breaths before finishing.</p><p>Move without forcing the body. Let the breath set the pace, and finish by choosing one intention for your day.</p>`,
-      '5 Yoga Poses for Beginners to Practice at Home': `<p class="mb-4">If you are new to yoga, begin with poses that help you understand alignment and breath without making the practice complicated.</p><h3 class="font-display text-xl mb-2" style="color:var(--ink);">Five foundations</h3><p class="mb-4">Try Mountain Pose, Child's Pose, Cat–Cow, Downward-Facing Dog, and a comfortable seated forward fold. Stay within a range that feels steady and comfortable.</p><p>Consistency matters more than intensity. A few minutes practiced regularly can help you become familiar with your body and your breath.</p>`,
-      'How to Build a 10-Minute Daily Meditation Habit': `<p class="mb-4">Meditation becomes easier when the goal is simply to show up. Choose the same time each day and start with ten minutes—or less if that feels more sustainable.</p><h3 class="font-display text-xl mb-2" style="color:var(--ink);">Make it simple</h3><p class="mb-4">Sit comfortably, soften your gaze or close your eyes, and notice the natural rhythm of your breathing. When your attention wanders, gently return to the breath.</p><p>There is no need to make the mind completely silent. The practice is noticing, returning, and beginning again.</p>`,
-      'Pranayama for Beginners: Start with Your Breath': `<p class="mb-4">Pranayama introduces conscious attention to breathing. For beginners, the safest place to start is with relaxed, natural breathing rather than forceful techniques.</p><h3 class="font-display text-xl mb-2" style="color:var(--ink);">A gentle beginning</h3><p class="mb-4">Sit comfortably and observe your breath for a few rounds. Then gradually make each inhale and exhale smooth and unhurried, without straining or holding the breath.</p><p>If a breathing practice causes discomfort, stop and return to normal breathing. When learning advanced techniques, seek guidance from a qualified teacher.</p>`
-    };
-    function openBlogPost(title){const modal=document.getElementById('blog-modal');document.getElementById('blog-modal-title').textContent=title;document.getElementById('blog-modal-content').innerHTML=blogPosts[title]||'<p>This article is being prepared for the Yogorise Journal.</p>';modal.classList.remove('hidden');modal.classList.add('flex');document.body.classList.add('overflow-hidden');}
+    // ---------- blog reader (posts loaded live from Supabase) ----------
+    let blogPostsById = {};
+
+    function escapeHtml(str){
+      return (str || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    function featuredCardHtml(post){
+      return `<article class="grid lg:grid-cols-[.9fr_1.1fr] overflow-hidden bg-white rounded-3xl border shadow-sm hover:shadow-lg transition-all duration-500" style="border-color:rgba(71,86,63,.12);">
+        <div class="relative min-h-[280px] lg:min-h-full overflow-hidden"><img src="${escapeHtml(post.cover_image || 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1000&q=85')}" alt="${escapeHtml(post.title)}" class="absolute inset-0 w-full h-full object-cover"><span class="absolute top-5 left-5 px-3 py-1.5 rounded-full text-xs font-bold text-white shadow-sm" style="background:var(--sage-deep);">Today's Featured Article</span></div>
+        <div class="p-7 sm:p-9 lg:p-10"><div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-wider mb-4" style="color:var(--clay);"><span>${escapeHtml(post.category)}</span><span>·</span><span>${escapeHtml(post.read_time)}</span></div><h3 class="text-2xl sm:text-3xl font-display font-medium mb-4" style="color:var(--ink);">${escapeHtml(post.title)}</h3><p class="leading-relaxed mb-6" style="color:var(--ink-soft);">${escapeHtml(post.excerpt)}</p><button type="button" class="inline-flex items-center gap-2 font-semibold transition hover:gap-3" style="color:var(--sage-deep);" onclick="openBlogPost('${post.id}')">Read Full Article <i class="fa-solid fa-arrow-right text-sm"></i></button></div>
+      </article>`;
+    }
+
+    function gridCardHtml(post){
+      return `<article class="bg-white rounded-3xl overflow-hidden border shadow-sm hover:shadow-lg transition-all duration-500" style="border-color:rgba(71,86,63,.12);"><div class="h-44 overflow-hidden"><img src="${escapeHtml(post.cover_image || 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=800&q=80')}" alt="${escapeHtml(post.title)}" class="w-full h-full object-cover hover:scale-105 transition duration-700"></div><div class="p-6"><span class="text-xs font-semibold uppercase tracking-wider" style="color:var(--sage-deep);">${escapeHtml(post.category)}</span><h3 class="text-xl font-display font-medium mt-2 mb-3">${escapeHtml(post.title)}</h3><p class="text-sm leading-relaxed mb-5" style="color:var(--ink-soft);">${escapeHtml(post.excerpt)}</p><button type="button" class="font-semibold text-sm" style="color:var(--sage-deep);" onclick="openBlogPost('${post.id}')">Read Article →</button></div></article>`;
+    }
+
+    async function loadBlogPosts(){
+      const loadingEl = document.getElementById('blog-loading');
+      const emptyEl = document.getElementById('blog-empty');
+      const featuredEl = document.getElementById('blog-featured');
+      const gridEl = document.getElementById('blog-grid');
+      try{
+        const { data, error } = await supabaseClient
+          .from('blog_posts')
+          .select('*')
+          .eq('published', true)
+          .order('created_at', { ascending: false })
+          .limit(10);
+        if (error) throw error;
+
+        loadingEl.classList.add('hidden');
+
+        if (!data || data.length === 0){
+          emptyEl.classList.remove('hidden');
+          return;
+        }
+
+        blogPostsById = {};
+        data.forEach(p => blogPostsById[p.id] = p);
+
+        const featured = data.find(p => p.featured) || data[0];
+        const rest = data.filter(p => p.id !== featured.id).slice(0, 3);
+
+        featuredEl.innerHTML = featuredCardHtml(featured);
+        gridEl.innerHTML = rest.map(gridCardHtml).join('');
+      } catch(err){
+        console.error('Failed to load blog posts:', err);
+        loadingEl.innerHTML = '<p style="color:var(--clay);">Could not load articles right now. Please check back soon.</p>';
+      }
+    }
+    loadBlogPosts();
+
+    function openBlogPost(id){
+      const post = blogPostsById[id];
+      if (!post) return;
+      const modal=document.getElementById('blog-modal');
+      document.getElementById('blog-modal-title').textContent=post.title;
+      document.getElementById('blog-modal-content').innerHTML=post.content_html || '<p>This article is being prepared for the Yogorise Journal.</p>';
+      modal.classList.remove('hidden');modal.classList.add('flex');document.body.classList.add('overflow-hidden');
+    }
     function closeBlogPost(){const modal=document.getElementById('blog-modal');modal.classList.add('hidden');modal.classList.remove('flex');document.body.classList.remove('overflow-hidden');}
     document.addEventListener('keydown',(e)=>{if(e.key==='Escape')closeBlogPost();});
 
