@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Log In — Yogorise</title>
+  <title>Log In / Sign Up — Yogorise</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -73,6 +73,13 @@
       animation:spin .7s linear infinite;
     }
     @keyframes spin{ to{ transform:rotate(360deg); } }
+
+    .auth-tab{
+      flex:1; text-align:center; padding:.7rem .5rem; border-radius:9999px;
+      font-size:.85rem; font-weight:600; color:var(--ink-soft);
+      transition:background .2s ease, color .2s ease; cursor:pointer;
+    }
+    .auth-tab.active{ background:var(--sage-deep); color:#fff; }
   </style>
 </head>
 <body class="antialiased">
@@ -101,12 +108,18 @@
       <div class="w-full max-w-md">
         <div class="bg-white rounded-3xl shadow-xl border p-8 sm:p-10" style="border-color:rgba(71,86,63,.12);">
 
-          <div class="text-center mb-8">
+          <div class="text-center mb-7">
             <div class="w-14 h-14 mx-auto mb-5 rounded-full flex items-center justify-center text-white text-xl" style="background:linear-gradient(135deg, var(--sage), var(--sage-deep)); box-shadow:0 10px 26px rgba(71,86,63,.25);">
               <i class="fa-solid fa-user-lock"></i>
             </div>
-            <h1 class="text-2xl sm:text-3xl font-display font-medium" style="color:var(--ink);">Welcome back</h1>
-            <p class="text-sm mt-2" style="color:var(--ink-soft);">Log in to manage the Yogorise Journal.</p>
+            <h1 id="auth-title" class="text-2xl sm:text-3xl font-display font-medium" style="color:var(--ink);">Welcome back</h1>
+            <p id="auth-subtitle" class="text-sm mt-2" style="color:var(--ink-soft);">Log in to manage the Yogorise Journal.</p>
+          </div>
+
+          <!-- Tab switcher -->
+          <div class="flex gap-1 p-1 rounded-full mb-7" style="background:var(--ivory-deep);">
+            <div id="tab-login" class="auth-tab active" data-tab="login">Log In</div>
+            <div id="tab-signup" class="auth-tab" data-tab="signup">Sign Up</div>
           </div>
 
           <div id="form-error" class="hidden mb-5 px-4 py-3 rounded-xl text-sm font-medium flex items-start gap-2" style="background:#FBEDEA; color:#9C4A2F;">
@@ -119,6 +132,7 @@
             <span id="form-success-text">Success.</span>
           </div>
 
+          <!-- Log In form -->
           <form id="login-form" class="space-y-5">
             <div>
               <label for="email" class="block text-xs font-semibold uppercase tracking-wider mb-2" style="color:var(--ink-soft);">Email</label>
@@ -147,12 +161,54 @@
             </button>
           </form>
 
+          <!-- Sign Up form -->
+          <form id="signup-form" class="space-y-5 hidden">
+            <div>
+              <label for="su-name" class="block text-xs font-semibold uppercase tracking-wider mb-2" style="color:var(--ink-soft);">Full Name</label>
+              <div class="relative">
+                <i class="fa-regular fa-user field-icon"></i>
+                <input id="su-name" type="text" required autocomplete="name" placeholder="Jane Doe" class="field-input">
+              </div>
+            </div>
+
+            <div>
+              <label for="su-email" class="block text-xs font-semibold uppercase tracking-wider mb-2" style="color:var(--ink-soft);">Email</label>
+              <div class="relative">
+                <i class="fa-regular fa-envelope field-icon"></i>
+                <input id="su-email" type="email" required autocomplete="email" placeholder="you@yogorise.com" class="field-input">
+              </div>
+            </div>
+
+            <div>
+              <label for="su-password" class="block text-xs font-semibold uppercase tracking-wider mb-2" style="color:var(--ink-soft);">Password</label>
+              <div class="relative">
+                <i class="fa-solid fa-lock field-icon"></i>
+                <input id="su-password" type="password" required minlength="6" autocomplete="new-password" placeholder="At least 6 characters" class="field-input">
+                <button type="button" id="toggle-su-password" tabindex="-1" class="absolute right-4 top-1/2 -translate-y-1/2 text-sm" style="color:var(--ink-soft);">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label for="su-password-confirm" class="block text-xs font-semibold uppercase tracking-wider mb-2" style="color:var(--ink-soft);">Confirm Password</label>
+              <div class="relative">
+                <i class="fa-solid fa-lock field-icon"></i>
+                <input id="su-password-confirm" type="password" required minlength="6" autocomplete="new-password" placeholder="Re-enter password" class="field-input">
+              </div>
+            </div>
+
+            <button type="submit" id="signup-submit-btn" class="w-full flex items-center justify-center gap-2 px-5 py-3.5 text-white rounded-full font-semibold text-sm shadow-md transition hover:-translate-y-0.5" style="background:var(--sage-deep);">
+              <span id="signup-submit-label">Create Account</span>
+            </button>
+          </form>
+
           <p class="text-center text-xs mt-7" style="color:var(--ink-soft);">
             <a href="index.html" class="font-semibold hover:opacity-70 transition" style="color:var(--sage-deep);"><i class="fa-solid fa-arrow-left-long mr-1"></i> Back to Yogorise</a>
           </p>
         </div>
 
-        <p class="text-center text-xs mt-6" style="color:var(--ink-soft);">
+        <p id="auth-footnote" class="text-center text-xs mt-6" style="color:var(--ink-soft);">
           Access is limited to Yogorise team members. Contact an administrator if you need an account.
         </p>
       </div>
@@ -170,6 +226,20 @@
     const successBox = document.getElementById('form-success');
     const successText = document.getElementById('form-success-text');
 
+    const signupForm = document.getElementById('signup-form');
+    const suName = document.getElementById('su-name');
+    const suEmail = document.getElementById('su-email');
+    const suPassword = document.getElementById('su-password');
+    const suPasswordConfirm = document.getElementById('su-password-confirm');
+    const signupBtn = document.getElementById('signup-submit-btn');
+    const signupLabel = document.getElementById('signup-submit-label');
+
+    const tabLogin = document.getElementById('tab-login');
+    const tabSignup = document.getElementById('tab-signup');
+    const authTitle = document.getElementById('auth-title');
+    const authSubtitle = document.getElementById('auth-subtitle');
+    const authFootnote = document.getElementById('auth-footnote');
+
     function showError(msg){
       successBox.classList.add('hidden');
       errorText.textContent = msg;
@@ -180,11 +250,40 @@
       successText.textContent = msg;
       successBox.classList.remove('hidden');
     }
+    function clearMessages(){
+      errorBox.classList.add('hidden');
+      successBox.classList.add('hidden');
+    }
     function setLoading(loading){
       submitBtn.disabled = loading;
       submitBtn.style.opacity = loading ? '.75' : '1';
       submitLabel.innerHTML = loading ? '<span class="spinner"></span>' : 'Log In';
     }
+    function setSignupLoading(loading){
+      signupBtn.disabled = loading;
+      signupBtn.style.opacity = loading ? '.75' : '1';
+      signupLabel.innerHTML = loading ? '<span class="spinner"></span>' : 'Create Account';
+    }
+
+    function switchTab(tab){
+      clearMessages();
+      const isLogin = tab === 'login';
+      tabLogin.classList.toggle('active', isLogin);
+      tabSignup.classList.toggle('active', !isLogin);
+      form.classList.toggle('hidden', !isLogin);
+      signupForm.classList.toggle('hidden', isLogin);
+      if (isLogin){
+        authTitle.textContent = 'Welcome back';
+        authSubtitle.textContent = 'Log in to manage the Yogorise Journal.';
+        authFootnote.textContent = 'Access is limited to Yogorise team members. Contact an administrator if you need an account.';
+      } else {
+        authTitle.textContent = 'Create your account';
+        authSubtitle.textContent = 'Sign up to start writing for the Yogorise Journal.';
+        authFootnote.textContent = 'New accounts may need admin approval before publishing access is granted.';
+      }
+    }
+    tabLogin.addEventListener('click', () => switchTab('login'));
+    tabSignup.addEventListener('click', () => switchTab('signup'));
 
     // If already logged in, go straight to admin
     (async function checkSession(){
@@ -228,6 +327,60 @@
       passwordEl.type = isPw ? 'text' : 'password';
       icon.classList.toggle('fa-eye');
       icon.classList.toggle('fa-eye-slash');
+    });
+
+    document.getElementById('toggle-su-password').addEventListener('click', () => {
+      const icon = document.querySelector('#toggle-su-password i');
+      const isPw = suPassword.type === 'password';
+      suPassword.type = isPw ? 'text' : 'password';
+      icon.classList.toggle('fa-eye');
+      icon.classList.toggle('fa-eye-slash');
+    });
+
+    signupForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearMessages();
+
+      const name = suName.value.trim();
+      const email = suEmail.value.trim();
+      const password = suPassword.value;
+      const confirm = suPasswordConfirm.value;
+
+      if (!name || !email || !password || !confirm){
+        showError('Please fill in all fields.');
+        return;
+      }
+      if (password.length < 6){
+        showError('Password must be at least 6 characters.');
+        return;
+      }
+      if (password !== confirm){
+        showError('Passwords do not match.');
+        return;
+      }
+
+      setSignupLoading(true);
+      try{
+        const { data, error } = await supabaseClient.auth.signUp({
+          email,
+          password,
+          options: { data: { full_name: name } }
+        });
+        if (error) throw error;
+
+        if (data && data.session){
+          showSuccess('Account created — redirecting…');
+          setTimeout(() => { window.location.href = 'admin.html'; }, 800);
+        } else {
+          showSuccess('Account created! Please check your email to confirm before logging in.');
+          signupForm.reset();
+        }
+      } catch(err){
+        console.error('Sign up failed:', err);
+        showError(err.message || 'Could not create account. Please try again.');
+      } finally {
+        setSignupLoading(false);
+      }
     });
 
     document.getElementById('forgot-link').addEventListener('click', async () => {
