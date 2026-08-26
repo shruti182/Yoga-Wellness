@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Nishu Yadav — Yogorise</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sage:    #7A9E7E;
+      --moss:    #3D6B4F;
+      --dusk:    #2C3E50;
+      --warm:    #F7F3EE;
+      --sand:    #EAE0D5;
+      --gold:    #C9A96E;
+      --muted:   #8A8A8A;
+      --text:    #2A2A2A;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--warm);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 2.5rem;
+      background: rgba(247,243,238,0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 400; letter-spacing: 0.08em;
+      color: var(--moss); text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--dusk); text-decoration: none; opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; }
+    .nav-cta {
+      background: var(--moss); color: #fff;
+      border: none; padding: 0.6rem 1.4rem; border-radius: 30px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.82rem;
+      letter-spacing: 0.05em; cursor: pointer; transition: background 0.2s;
+      text-decoration: none;
+    }
+    .nav-cta:hover { background: var(--sage); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 6rem 5vw 4rem;
+      gap: 4rem;
+      background: var(--warm);
+    }
+    .hero-text { order: 1; }
+    .eyebrow {
+      font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.2rem;
+    }
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 300; line-height: 1.05;
+      color: var(--dusk); margin-bottom: 0.5rem;
+    }
+    .hero-name em { font-style: italic; color: var(--moss); }
+    .hero-title {
+      font-size: 1rem; color: var(--muted); letter-spacing: 0.04em;
+      margin-bottom: 2rem;
+    }
+    .hero-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem; font-style: italic;
+      color: var(--dusk); opacity: 0.75;
+      border-left: 3px solid var(--gold);
+      padding-left: 1.2rem;
+      margin-bottom: 2.5rem;
+      line-height: 1.5;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--moss); color: #fff;
+      padding: 0.85rem 2rem; border-radius: 30px;
+      font-size: 0.88rem; letter-spacing: 0.05em;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--sage); }
+    .btn-outline {
+      border: 1.5px solid var(--moss); color: var(--moss);
+      padding: 0.83rem 2rem; border-radius: 30px;
+      font-size: 0.88rem; letter-spacing: 0.05em;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .btn-outline:hover { background: var(--moss); color: #fff; }
+
+    /* hero image area */
+    .hero-visual { order: 2; position: relative; }
+    .hero-img-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 460px;
+      margin: 0 auto;
+    }
+    .hero-img-bg {
+      position: absolute; inset: -18px -18px 18px 18px;
+      background: var(--sand); border-radius: 60% 40% 50% 50% / 55% 45% 55% 45%;
+      z-index: 0;
+    }
+    .hero-img {
+      position: relative; z-index: 1;
+      width: 100%; aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: 50% 50% 48% 52% / 55% 48% 52% 45%;
+      display: block;
+    }
+    .hero-badge {
+      position: absolute; bottom: 2rem; right: -1.5rem; z-index: 2;
+      background: #fff; border-radius: 16px;
+      padding: 1rem 1.4rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .hero-badge strong { display: block; font-size: 1.6rem; color: var(--moss); }
+    .hero-badge span { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; }
+
+    /* ── DIVIDER ── */
+    .leaf-divider {
+      text-align: center; padding: 2rem 0; color: var(--sage); font-size: 1.4rem;
+      opacity: 0.5;
+    }
+
+    /* ── STATS STRIP ── */
+    .stats {
+      background: var(--moss); color: #fff;
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 0;
+    }
+    .stat-item {
+      flex: 1; min-width: 160px; max-width: 220px;
+      padding: 2.5rem 1.5rem; text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.12);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem; font-weight: 300; display: block;
+    }
+    .stat-label {
+      font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+      opacity: 0.7; margin-top: 0.25rem;
+    }
+
+    /* ── STORY ── */
+    .story {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; padding: 6rem 5vw; align-items: center;
+    }
+    .section-eyebrow {
+      font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.8rem;
+    }
+    .section-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300; line-height: 1.15;
+      color: var(--dusk); margin-bottom: 1.5rem;
+    }
+    .section-heading em { font-style: italic; color: var(--moss); }
+    .body-text {
+      font-size: 0.97rem; color: #555; line-height: 1.85;
+      margin-bottom: 1.2rem;
+    }
+    .story-visual {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    }
+    .story-card {
+      background: var(--sand); border-radius: 20px;
+      padding: 2rem 1.5rem; text-align: center;
+    }
+    .story-card:nth-child(2) { margin-top: 2rem; }
+    .story-card:nth-child(4) { margin-top: -2rem; }
+    .story-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+    .story-card h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; margin-bottom: 0.4rem; color: var(--dusk);
+    }
+    .story-card p { font-size: 0.82rem; color: var(--muted); }
+
+    /* ── PHILOSOPHY ── */
+    .philosophy {
+      background: var(--sand); padding: 6rem 5vw; text-align: center;
+    }
+    .philosophy-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 2rem; max-width: 1000px; margin: 3rem auto 0;
+    }
+    .phil-card {
+      background: #fff; padding: 2.5rem 2rem;
+      border-radius: 12px; transition: all 0.3s;
+    }
+    .phil-card:hover { transform: translateY(-6px); box-shadow: 0 12px 28px rgba(0,0,0,0.08); }
+    .phil-icon { font-size: 2.2rem; margin-bottom: 1rem; display: block; }
+    .phil-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem; color: var(--dusk); margin-bottom: 0.8rem; font-weight: 400;
+    }
+    .phil-card p { font-size: 0.92rem; color: #666; line-height: 1.65; }
+
+    /* ── CREDENTIALS ── */
+    .credentials {
+      background: var(--warm); padding: 6rem 5vw;
+    }
+    .cred-grid {
+      display: grid; gap: 2rem; margin-top: 3rem;
+    }
+    .cred-item {
+      display: grid; grid-template-columns: 40px 1fr;
+      gap: 1.5rem; align-items: flex-start;
+    }
+    .cred-dot {
+      width: 12px; height: 12px; background: var(--moss); border-radius: 50%;
+      margin-top: 0.35rem;
+    }
+    .cred-item h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; color: var(--dusk); margin-bottom: 0.4rem;
+    }
+    .cred-item p { font-size: 0.92rem; color: var(--muted); }
+
+    /* ── INSTAGRAM CTA ── */
+    .insta-section {
+      background: var(--moss); color: #fff; padding: 5rem 5vw; text-align: center;
+    }
+    .insta-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 300;
+      margin-bottom: 0.8rem;
+    }
+    .insta-section p { font-size: 1rem; opacity: 0.9; margin-bottom: 2rem; }
+    .insta-btn {
+      display: inline-flex; align-items: center; gap: 0.8rem;
+      background: #fff; color: var(--moss);
+      padding: 0.9rem 2.2rem; border-radius: 30px;
+      text-decoration: none; font-weight: 500; transition: all 0.3s;
+    }
+    .insta-btn:hover { transform: scale(1.05); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+    .insta-btn svg { width: 20px; height: 20px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dusk); color: #fff; text-align: center; padding: 2rem 5vw;
+      font-size: 0.88rem; opacity: 0.85;
+    }
+    footer a { color: #fff; text-decoration: none; opacity: 0.9; }
+    footer a:hover { opacity: 1; }
+
+    /* ── ANIMATION ── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s, transform 0.7s; }
+    .reveal.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">Yogorise</a>
+  <ul class="nav-links">
+    <li><a href="/#courses">Classes</a></li>
+    <li><a href="/#live">Live Sessions</a></li>
+    <li><a href="/#blog">Blog</a></li>
+    <li><a href="/about.html" style="opacity:1; color: var(--moss);">About</a></li>
+  </ul>
+  <a href="/#" class="nav-cta">Begin Gently</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text reveal">
+    <p class="eyebrow">Founder & Lead Instructor</p>
+    <h1 class="hero-name">Nishu<br><em>Yadav</em></h1>
+    <p class="hero-title">Certified Yoga Teacher · Wellness Guide · Founder of Yogorise</p>
+    <blockquote class="hero-quote">
+      "Yoga is not about touching your toes.<br>It is what you learn on the way down."
+    </blockquote>
+    <div class="hero-actions">
+      <a href="/#courses" class="btn-primary">Explore Her Classes</a>
+      <a href="https://www.instagram.com/nishu.yaadav/" target="_blank" class="btn-outline">Follow on Instagram</a>
+    </div>
+  </div>
+
+  <div class="hero-visual reveal">
+    <div class="hero-img-wrap">
+      <div class="hero-img-bg"></div>
+      <img src="nishu-photo.png" alt="Nishu Yadav - Yoga Instructor" class="hero-img" />
+      <div class="hero-badge">
+        <strong>7+</strong>
+        <span>Years Teaching</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-item reveal">
+    <span class="stat-number">5,000+</span>
+    <span class="stat-label">Students Guided</span>
+  </div>
+  <div class="stat-item reveal">
+    <span class="stat-number">200 hr</span>
+    <span class="stat-label">Yoga Alliance Certified</span>
+  </div>
+  <div class="stat-item reveal">
+    <span class="stat-number">12+</span>
+    <span class="stat-label">Yoga Styles Taught</span>
+  </div>
+  <div class="stat-item reveal">
+    <span class="stat-number">4.9 ★</span>
+    <span class="stat-label">Average Rating</span>
+  </div>
+</div>
+
+<!-- STORY -->
+<section class="story">
+  <div class="reveal">
+    <p class="section-eyebrow">Her Journey</p>
+    <h2 class="section-heading">A practice rooted in<br><em>presence & breath</em></h2>
+    <p class="body-text">
+      Nishu Yadav's relationship with yoga began not in a studio, but in stillness — a quiet searching that eventually led her to the mat. What started as a personal practice to find calm in the chaos of daily life became a lifelong calling to guide others home to themselves.
+    </p>
+    <p class="body-text">
+      After completing her 200-hour Yoga Alliance Teacher Training, Nishu deepened her study across Hatha, Vinyasa, Yin, and Pranayama traditions. She has trained thousands of students — from complete beginners finding their first breath to experienced practitioners refining their alignment.
+    </p>
+    <p class="body-text">
+      Nishu founded Yogorise with a simple belief: that every body deserves a gentle entry point into yoga, and every mind deserves the quietude that consistent practice creates. Her teaching style is warm, unhurried, and deeply human.
+    </p>
+  </div>
+
+  <div class="story-visual reveal">
+    <div class="story-card">
+      <div class="story-icon">🌿</div>
+      <h4>Hatha & Alignment</h4>
+      <p>Building strength from the ground up, posture by posture</p>
+    </div>
+    <div class="story-card">
+      <div class="story-icon">🌊</div>
+      <h4>Vinyasa Flow</h4>
+      <p>Breath-linked movement that finds rhythm in stillness</p>
+    </div>
+    <div class="story-card">
+      <div class="story-icon">🕊️</div>
+      <h4>Yin & Restorative</h4>
+      <p>Deep surrender, patience, and long-held release</p>
+    </div>
+    <div class="story-card">
+      <div class="story-icon">🌬️</div>
+      <h4>Pranayama</h4>
+      <p>The art of breath as the foundation of all practice</p>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy">
+  <div class="reveal">
+    <p class="section-eyebrow">Teaching Philosophy</p>
+    <h2 class="section-heading">What Nishu believes<br><em>yoga should feel like</em></h2>
+  </div>
+  <div class="philosophy-grid">
+    <div class="phil-card reveal">
+      <div class="phil-icon">🌱</div>
+      <h3>Meet Yourself Where You Are</h3>
+      <p>Every class begins without expectation. There is no correct version of a pose — only the one that belongs to your body today.</p>
+    </div>
+    <div class="phil-card reveal">
+      <div class="phil-icon">🧘</div>
+      <h3>Breath Before Depth</h3>
+      <p>The quality of your breath is more important than the depth of your stretch. Nishu teaches breath as the real teacher — the body simply follows.</p>
+    </div>
+    <div class="phil-card reveal">
+      <div class="phil-icon">✨</div>
+      <h3>Consistency Over Intensity</h3>
+      <p>Ten quiet minutes on the mat every morning will transform you more than one heroic session a week. Small, steady practice is Nishu's core belief.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section class="credentials">
+  <div style="max-width: 760px; margin: 0 auto;">
+    <div class="reveal">
+      <p class="section-eyebrow">Training & Certifications</p>
+      <h2 class="section-heading">Grounded in <em>authentic lineage</em></h2>
+    </div>
+    <div class="cred-grid">
+      <div class="cred-item reveal">
+        <div class="cred-dot"></div>
+        <div>
+          <h4>200-Hour Yoga Alliance RYT</h4>
+          <p>Registered Yoga Teacher — internationally recognised certification</p>
+        </div>
+      </div>
+      <div class="cred-item reveal">
+        <div class="cred-dot"></div>
+        <div>
+          <h4>Pranayama & Breathwork Specialist</h4>
+          <p>Advanced training in yogic breathing techniques for stress and healing</p>
+        </div>
+      </div>
+      <div class="cred-item reveal">
+        <div class="cred-dot"></div>
+        <div>
+          <h4>Yin Yoga & Restorative Training</h4>
+          <p>Specialised in long-hold, fascia-focused practices for deep restoration</p>
+        </div>
+      </div>
+      <div class="cred-item reveal">
+        <div class="cred-dot"></div>
+        <div>
+          <h4>Mindfulness & Meditation Guide</h4>
+          <p>Certified in guided meditation and body-scan mindfulness techniques</p>
+        </div>
+      </div>
+      <div class="cred-item reveal">
+        <div class="cred-dot"></div>
+        <div>
+          <h4>Prenatal Yoga Training</h4>
+          <p>Qualified to guide expectant mothers safely through all trimesters</p>
+        </div>
+      </div>
+      <div class="cred-item reveal">
+        <div class="cred-dot"></div>
+        <div>
+          <h4>7+ Years of Teaching Experience</h4>
+          <p>Having guided students across India — online and in person</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM CTA -->
+<section class="insta-section">
+  <div class="reveal">
+    <h2>Follow Nishu's Daily Practice</h2>
+    <p>Poses, reflections, and gentle moments — shared every day on Instagram.</p>
+    <a href="https://www.instagram.com/nishu.yaadav/" target="_blank" class="insta-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <circle cx="12" cy="12" r="4"/>
+        <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+      </svg>
+      @nishu.yaadav
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Yogorise Wellness Pvt. Ltd. · Designed with stillness in mind ·
+    <a href="https://www.instagram.com/nishu.yaadav/" target="_blank">@nishu.yaadav</a>
+  </p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
